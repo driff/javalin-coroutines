@@ -1,0 +1,30 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.3.21'
+}
+
+group 'com.treefuerza.pruebas'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    manifest { attributes 'Main-Class': 'com.treefuerza.pruebas.StartKt' }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile 'io.javalin:javalin:2.8.0'
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1"
+    compile "org.slf4j:slf4j-simple:1.7.26"
+    compile "com.fasterxml.jackson.core:jackson-databind:2.9.8"
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
